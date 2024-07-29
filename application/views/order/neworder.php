@@ -19,8 +19,19 @@
         <?= $this->session->flashdata('msg'); ?>
         <?= $this->session->flashdata('msgnomor'); ?>
         <?= $this->session->flashdata('msgsubmit'); ?>
-        <?= $this->session->flashdata('ceknokon'); ?>
+        <?= $this->session->flashdata('ceknokoninv'); ?>
+        <?= $this->session->flashdata('ceknokonval'); ?>
+        
     </div>
+    <div class="navbar-nav ml-auto">
+                
+                <form action="<?= base_url('datatask/check'); ?>" method="post">
+                    <div class="input-group mb-3">
+                        <input required="required" type="text" placeholder="cek nomor kontrak" name="kontrak" id="kontrak" autocomplete="off" autofocus>
+                                     <button class="btn btn-warning">Check</button>
+                        
+                </form>
+              </div>
     <!-- <div class="col-sm-2 mb-4">
             <div class="card bg-primary shadow h-50 py-2">
                 <div class="card-body">
@@ -35,12 +46,13 @@
                 </div>
             </div>
         </div> -->
+       
     <div class="page-title">
-
+    
         <div class="title_right">
             <div class="col-md-12 col-sm-12 col-xs-12 form-group pull-right top_search">
                 <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
-
+                
                 <h6 for="" class="control-label"> User Logged in : <?= $user['name']; ?></h6>
             </div>
             <div class="col mb-4">
