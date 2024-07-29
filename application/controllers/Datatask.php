@@ -56,6 +56,25 @@ class Datatask extends CI_Controller
         $this->load->view('order/neworder', $data);
         $this->load->view('templates/footer');
     }
+    public function Check()
+    {
+        $data3 = array(
+            'kontrak' => trim($this->input->post('kontrak')));
+            $inputdate = $this->db->query("SELECT create_date FROM master_kk where no_kontrak='{$data3['kontrak']}' limit 1");
+            $cek_date = $inputdate->row_array();
+            // var_dump($cek_date);die;
+            $query = $this->db->query("SELECT no_kontrak,create_date FROM master_kk where no_kontrak='{$data3['kontrak']}'"); //perubahan cek double kk ke cek double kontrak \ 01 mei 2024 perubahan ke validasi by nomrkk \ 29 jun 24 jov req val by nokontrak//
+            // return $query->row_array();
+            $cek_kontrak = $query->num_rows();
+            // var_dump($cek_date);die;
+            if ($cek_kontrak > 0) {
+                $this->session->set_flashdata('ceknokoninv', '<div class="alert alert-danger" role="alert">Validasi Check : Nomor Kontrak Sudah digunakan sebelumnya '. $data3['kontrak'] .' pada '. $cek_date['create_date'] .''); //01 mei 2024 perubahan ke validasi by nomrkk
+                redirect(site_url('datatask/neworder'));
+            } else {  
+                $this->session->set_flashdata('ceknokonval', '<div class="alert alert-success" role="success">Validasi Check : Nomor Kontrak '. $data3['kontrak'] .'  belum digunakan silakan dilanjutkan'); //01 mei 2024 perubahan ke validasi by nomrkk
+                redirect(site_url('datatask/neworder'));
+            }
+    }
    
     public function Simpan()
     {   
